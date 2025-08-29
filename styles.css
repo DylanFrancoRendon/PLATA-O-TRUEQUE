@@ -1,0 +1,238 @@
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#f4f4f9;color:#333}
+header{background:#5B3FC9;color:white;padding:15px;display:flex;justify-content:space-between;align-items:center}
+header .logo img{height:100px}
+nav a{color:white;text-decoration:none;margin:0 10px;font-weight:bold}
+nav a:hover{text-decoration:underline}
+.hero{text-align:center;padding:80px 20px;background:#2CA05A;color:white}
+.btn{display:inline-block;background:#5B3FC9;color:white;padding:12px 20px;border-radius:6px;text-decoration:none;margin-top:20px}
+.btn:hover{background:#2CA05A}
+.catalogo{display:grid;grid-template-columns:repeat(4, 1fr);gap:20px;padding:20px}
+.producto{background:white;padding:15px;border-radius:12px;box-shadow:0 4px 8px rgba(0,0,0,0.1);text-align:center}
+.producto img{width:100%;height:300px;object-fit:cover;border-radius:8px}
+.form-container{max-width:400px;margin:40px auto;background:white;padding:20px;border-radius:12px;box-shadow:0 4px 8px rgba(0,0,0,0.1)}
+.form-container input,.form-container textarea{width:100%;padding:10px;margin:10px 0;border:1px solid #ccc;border-radius:6px}
+.chat-container{max-width:500px;margin:40px auto;background:white;padding:20px;border-radius:12px;box-shadow:0 4px 8px rgba(0,0,0,0.1);display:flex;flex-direction:column}
+.mensajes{max-height:300px;overflow-y:auto;margin-bottom:15px;display:flex;flex-direction:column}
+.mensaje{padding:10px;margin:5px 0;border-radius:8px;max-width:70%}
+.mensaje.vendedor{background:#eee;align-self:flex-start}
+.mensaje.comprador{background:#5B3FC9;color:white;align-self:flex-end}
+.chat-form{display:flex}
+.chat-form input{flex:1;padding:10px;border-radius:6px 0 0 6px;border:1px solid #ccc}
+.chat-form button{background:#2CA05A;border:none;color:white;padding:10px 20px;border-radius:0 6px 6px 0;cursor:pointer}
+.perfil-container {
+  position: relative;
+}
+
+.perfil-foto {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid white;
+}
+
+.perfil-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 50px;
+  background: white;
+  color: #333;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  min-width: 180px;
+  z-index: 100;
+}
+
+.perfil-menu.show {
+  display: block;
+}
+
+.perfil-menu p {
+  margin: 5px 0;
+}
+
+.perfil-menu a {
+  display: block;
+  margin-top: 10px;
+  text-decoration: none;
+  color: #5B3FC9;
+  font-weight: bold;
+}
+
+.perfil-menu a:hover {
+  color: #2CA05A;
+}
+/* --- Publicidad --- */
+.publicidad {
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  max-width: 900px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.publicidad h2 {
+  margin-bottom: 20px;
+  color: #5B3FC9;
+}
+
+.anuncios {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.anuncio img {
+  width: 250px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.anuncio img:hover {
+  transform: scale(1.05);
+}
+/* --- Nosotros --- */
+.nosotros {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 40px auto;
+  max-width: 900px;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 1;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-align: center;
+  min-width: 250px;
+}
+
+.historia {
+  text-align: center;
+  margin: 40px auto;
+  max-width: 900px;
+}
+
+.video-container {
+  margin-top: 20px;
+}
+
+.video-container iframe {
+  width: 100%;
+  max-width: 700px;
+  border-radius: 12px;
+}
+/* --- Contacto --- */
+.contacto-info {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 40px auto;
+  max-width: 1000px;
+  flex-wrap: wrap;
+}
+
+.contacto-form {
+  max-width: 600px;
+  margin: 40px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.contacto-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.contacto-form input,
+.contacto-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.contacto-mapa {
+  text-align: center;
+  margin: 40px auto;
+  max-width: 900px;
+}
+
+.map-container iframe {
+  border-radius: 12px;
+}
+/* --- Ajustes para equilibrio morado + verde --- */
+
+/* Mantener header morado */
+header {
+  background: #5B3FC9;
+}
+
+/* Links siguen morados, pero hover en verde */
+nav a {
+  color: white;
+  font-weight: bold;
+}
+
+nav a:hover {
+  color: #2CA05A;
+  text-decoration: underline;
+}
+
+/* Botones verdes */
+.btn {
+  background: #2CA05A;
+  color: white;
+  font-weight: bold;
+}
+
+.btn:hover {
+  background: #238646; /* verde oscuro */
+}
+
+/* Footer morado con texto blanco */
+footer {
+  background: #5B3FC9;
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+
+/* Tarjetas, formularios, secciones */
+.card, .form-container, .chat-container {
+  border: 2px solid #2CA05A33; /* verde translúcido */
+}
+
+/* Títulos verdes */
+h1, h2, h3 {
+  color: #2CA05A;
+}
+
+/* En publicidad, títulos verdes */
+.publicidad h2 {
+  color: #2CA05A;
+}
+
+/* Perfil-menu mantiene morado en links, hover en verde */
+.perfil-menu a {
+  color: #5B3FC9;
+}
+
+.perfil-menu a:hover {
+  color: #2CA05A;
+}
