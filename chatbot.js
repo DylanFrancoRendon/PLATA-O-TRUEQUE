@@ -1,30 +1,40 @@
-   const chatbotBtn = document.getElementById("chatbotBtn");
+    const chatbotBtn = document.getElementById("chatbotBtn");
     const chatWindow = document.getElementById("chatWindow");
     const chatMessages = document.getElementById("chatMessages");
     const userInput = document.getElementById("userInput");
     const sendBtn = document.getElementById("sendBtn");
 
-    // Base de conocimiento
+    // Base de conocimiento completa
     const baseConocimiento = {
+      // General
       "¿qué es plata o trueque?": "Es una aplicación que permite comprar, vender e intercambiar objetos de manera sencilla y segura.",
       "¿cómo funciona el sistema de trueque?": "Puedes ofrecer un objeto tuyo a cambio de otro, y si ambas partes están de acuerdo, se realiza el intercambio.",
       "¿se puede pagar con dinero?": "Sí, además del trueque, la aplicación permite pagar con dinero si el vendedor lo acepta.",
       "¿cómo funciona el chat en la aplicación?": "El chat permite comunicarte directamente con el vendedor o comprador para negociar el precio o las condiciones del intercambio.",
       "¿es seguro usar plata o trueque?": "La aplicación cuenta con un sistema de verificación y valoraciones de usuarios para brindar mayor confianza en las transacciones.",
+
+      // Políticas
       "¿cuáles son las políticas de la empresa?": "Plata o Trueque promueve transacciones seguras, prohíbe la venta de productos ilegales y fomenta el respeto entre usuarios.",
       "¿qué pasa si un usuario incumple las reglas?": "El incumplimiento de las políticas puede llevar a advertencias, suspensión temporal o eliminación de la cuenta.",
       "¿existen comisiones por usar la aplicación?": "El uso básico es gratuito, aunque ciertos servicios premium pueden tener un costo adicional.",
+
+      // Envíos
       "¿cómo funcionan los envíos?": "Los envíos pueden ser acordados entre comprador y vendedor, ya sea en persona o mediante mensajería.",
       "¿plata o trueque ofrece servicio de envío?": "Actualmente la aplicación no gestiona envíos propios, pero recomienda opciones seguras de mensajería.",
       "¿quién paga el envío?": "El costo del envío puede ser cubierto por el comprador, el vendedor o compartido, según lo acuerden en el chat.",
+
+      // Servicio al cliente
       "¿cómo contacto al servicio al cliente?": "Puedes comunicarte desde la sección de ayuda en la aplicación o escribir al correo oficial de soporte.",
       "¿en qué horarios atiende el servicio al cliente?": "El servicio al cliente está disponible de lunes a viernes de 8:00 a.m. a 6:00 p.m.",
       "¿qué hago si tengo un problema con una transacción?": "Debes reportarlo en la aplicación y el equipo de soporte te guiará para resolverlo.",
+
+      // Disponibilidad
       "¿en qué países está disponible la aplicación?": "Actualmente Plata o Trueque está disponible en varios países de Latinoamérica.",
-      "¿puedo usar la aplicación en cualquier horario?": "Sí, la aplicación está disponible las 24 horas.",
-      "¿la aplicación funciona en todos los dispositivos?": "Sí, está disponible para Android, iOS y también versión web."
+      "¿puedo usar la aplicación en cualquier horario?": "Sí, la aplicación está disponible las 24 horas, aunque la respuesta de los usuarios depende de su disponibilidad.",
+      "¿la aplicación funciona en todos los dispositivos?": "Sí, está disponible para Android y iOS, y también tiene una versión web."
     };
 
+    // Listas de saludos y despedidas
     const saludos = ["hola", "buenos días", "buenas tardes", "buenas noches", "hey", "hello"];
     const despedidas = ["adiós", "hasta luego", "nos vemos", "chau", "bye"];
 
