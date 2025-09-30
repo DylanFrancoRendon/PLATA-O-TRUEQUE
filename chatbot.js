@@ -1,98 +1,76 @@
-    const chatbotBtn = document.getElementById("chatbotBtn");
-    const chatWindow = document.getElementById("chatWindow");
-    const chatMessages = document.getElementById("chatMessages");
-    const userInput = document.getElementById("userInput");
-    const sendBtn = document.getElementById("sendBtn");
+    const btn = document.getElementById("chatbot-btn");
+    const windowChat = document.getElementById("chatbot-window");
+    const messages = document.getElementById("chatbot-messages");
+    const userInput = document.getElementById("user-input");
+    const sendBtn = document.getElementById("send-btn");
 
-    // Base de conocimiento completa
-    const baseConocimiento = {
-      // General
-      "¿qué es plata o trueque?": "Es una aplicación que permite comprar, vender e intercambiar objetos de manera sencilla y segura.",
-      "¿cómo funciona el sistema de trueque?": "Puedes ofrecer un objeto tuyo a cambio de otro, y si ambas partes están de acuerdo, se realiza el intercambio.",
-      "¿se puede pagar con dinero?": "Sí, además del trueque, la aplicación permite pagar con dinero si el vendedor lo acepta.",
-      "¿cómo funciona el chat en la aplicación?": "El chat permite comunicarte directamente con el vendedor o comprador para negociar el precio o las condiciones del intercambio.",
-      "¿es seguro usar plata o trueque?": "La aplicación cuenta con un sistema de verificación y valoraciones de usuarios para brindar mayor confianza en las transacciones.",
-
-      // Políticas
-      "¿cuáles son las políticas de la empresa?": "Plata o Trueque promueve transacciones seguras, prohíbe la venta de productos ilegales y fomenta el respeto entre usuarios.",
-      "¿qué pasa si un usuario incumple las reglas?": "El incumplimiento de las políticas puede llevar a advertencias, suspensión temporal o eliminación de la cuenta.",
-      "¿existen comisiones por usar la aplicación?": "El uso básico es gratuito, aunque ciertos servicios premium pueden tener un costo adicional.",
-
-      // Envíos
-      "¿cómo funcionan los envíos?": "Los envíos pueden ser acordados entre comprador y vendedor, ya sea en persona o mediante mensajería.",
-      "¿plata o trueque ofrece servicio de envío?": "Actualmente la aplicación no gestiona envíos propios, pero recomienda opciones seguras de mensajería.",
-      "¿quién paga el envío?": "El costo del envío puede ser cubierto por el comprador, el vendedor o compartido, según lo acuerden en el chat.",
-
-      // Servicio al cliente
-      "¿cómo contacto al servicio al cliente?": "Puedes comunicarte desde la sección de ayuda en la aplicación o escribir al correo oficial de soporte.",
-      "¿en qué horarios atiende el servicio al cliente?": "El servicio al cliente está disponible de lunes a viernes de 8:00 a.m. a 6:00 p.m.",
-      "¿qué hago si tengo un problema con una transacción?": "Debes reportarlo en la aplicación y el equipo de soporte te guiará para resolverlo.",
-
-      // Disponibilidad
-      "¿en qué países está disponible la aplicación?": "Actualmente Plata o Trueque está disponible en varios países de Latinoamérica.",
-      "¿puedo usar la aplicación en cualquier horario?": "Sí, la aplicación está disponible las 24 horas, aunque la respuesta de los usuarios depende de su disponibilidad.",
-      "¿la aplicación funciona en todos los dispositivos?": "Sí, está disponible para Android y iOS, y también tiene una versión web."
-    };
-
-    // Listas de saludos y despedidas
-    const saludos = ["hola", "buenos días", "buenas tardes", "buenas noches", "hey", "hello"];
-    const despedidas = ["adiós", "hasta luego", "nos vemos", "chau", "bye"];
-
-    const respuestasSaludo = [
-      "¡Hola! 😊 Soy tu chatbot de Plata o Trueque. ¿Quieres saber sobre políticas, envíos, servicio al cliente o disponibilidad?",
-      "¡Bienvenido a Plata o Trueque! 🌟 Pregúntame lo que quieras sobre la app.",
-      "¡Hola! 👋 ¿Quieres que te explique cómo funciona la app o resolver una duda puntual?"
+    // Base de conocimiento con palabras clave
+    const knowledgeBase = [
+      { keywords: ["qué", "plata", "trueque"], response: "Es una aplicación que permite comprar, vender e intercambiar objetos de manera sencilla y segura." },
+      { keywords: ["cómo", "funciona", "trueque"], response: "Puedes ofrecer un objeto tuyo a cambio de otro y, si ambas partes están de acuerdo, se realiza el intercambio." },
+      { keywords: ["pagar", "dinero"], response: "Sí, además del trueque, puedes pagar con dinero si el vendedor lo acepta." },
+      { keywords: ["chat"], response: "El chat permite comunicarte directamente con el vendedor o comprador para negociar el precio o condiciones." },
+      { keywords: ["seguro", "confianza"], response: "La app cuenta con verificación y valoraciones de usuarios para dar más confianza en las transacciones." },
+      { keywords: ["envío", "mensajería"], response: "Los envíos pueden acordarse entre comprador y vendedor, en persona o por mensajería." },
+      { keywords: ["cliente", "soporte"], response: "Puedes comunicarte con servicio al cliente desde la sección de ayuda en la app o por correo." },
+      { keywords: ["países", "disponible"], response: "Actualmente Plata o Trueque está disponible en varios países de Latinoamérica." }
     ];
 
-    const respuestasDespedida = [
-      "¡Hasta pronto! 👋 Gracias por usar Plata o Trueque.",
-      "¡Nos vemos! 😊 Que tengas un excelente día.",
-      "¡Adiós! 🌟 Vuelve cuando quieras aprender más sobre la app."
-    ];
+    const greetings = ["hola", "buenos días", "buenas", "hey"];
+    const farewells = ["adiós", "bye", "hasta luego", "chau"];
 
-    // Mostrar/ocultar ventana
-    chatbotBtn.addEventListener("click", () => {
-      chatWindow.style.display = chatWindow.style.display === "flex" ? "none" : "flex";
+    // Función para agregar mensajes
+    function addMessage(sender, text) {
+      const div = document.createElement("div");
+      div.classList.add(sender);
+      div.innerText = text;
+      messages.appendChild(div);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    // Buscar coincidencias por palabras clave
+    function findResponse(text) {
+      const lowerText = text.toLowerCase();
+
+      // Detectar saludo
+      if (greetings.some(g => lowerText.includes(g))) {
+        return "¡Hola! 👋 Soy tu asistente de Plata o Trueque. Pregúntame sobre envíos, pagos, políticas o servicio al cliente.";
+      }
+
+      // Detectar despedida
+      if (farewells.some(f => lowerText.includes(f))) {
+        return "¡Hasta pronto! 👋 Gracias por usar Plata o Trueque.";
+      }
+
+      // Buscar en base de conocimiento
+      for (let item of knowledgeBase) {
+        if (item.keywords.some(word => lowerText.includes(word))) {
+          return item.response;
+        }
+      }
+
+      return "🤔 No estoy seguro, ¿puedes reformular la pregunta?";
+    }
+
+    // Manejar envío de mensaje
+    function handleUserInput() {
+      const text = userInput.value.trim();
+      if (!text) return;
+      addMessage("user", "🙋 " + text);
+      userInput.value = "";
+
+      const response = findResponse(text);
+      setTimeout(() => addMessage("bot", "🤖 " + response), 500);
+    }
+
+    // Abrir/cerrar ventana
+    btn.addEventListener("click", () => {
+      windowChat.style.display = windowChat.style.display === "flex" ? "none" : "flex";
+      windowChat.style.flexDirection = "column";
     });
 
     // Enviar mensaje
-    sendBtn.addEventListener("click", enviarMensaje);
-    userInput.addEventListener("keypress", (e) => {
-      if (e.key === "Enter") enviarMensaje();
+    sendBtn.addEventListener("click", handleUserInput);
+    userInput.addEventListener("keypress", e => {
+      if (e.key === "Enter") handleUserInput();
     });
-
-    function enviarMensaje() {
-      const texto = userInput.value.trim();
-      if (!texto) return;
-
-      agregarMensaje(texto, "user");
-      userInput.value = "";
-
-      setTimeout(() => {
-        const respuesta = obtenerRespuesta(texto.toLowerCase());
-        agregarMensaje(respuesta, "bot");
-      }, 600);
-    }
-
-    function agregarMensaje(texto, tipo) {
-      const div = document.createElement("div");
-      div.classList.add("message", tipo === "user" ? "user-message" : "bot-message");
-      div.textContent = texto;
-      chatMessages.appendChild(div);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
-
-    function obtenerRespuesta(texto) {
-      if (saludos.some(s => texto.includes(s))) {
-        return respuestasSaludo[Math.floor(Math.random() * respuestasSaludo.length)];
-      }
-      if (despedidas.some(d => texto.includes(d))) {
-        return respuestasDespedida[Math.floor(Math.random() * respuestasDespedida.length)];
-      }
-      for (let pregunta in baseConocimiento) {
-        if (texto.includes(pregunta.replace(/[¿?]/g, "").trim())) {
-          return baseConocimiento[pregunta];
-        }
-      }
-      return "🤔 No estoy seguro, ¿puedes reformular la pregunta?";
-    }
